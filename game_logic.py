@@ -5,7 +5,8 @@ from snowman import WORDS
 
 def get_random_word():
     """Selects a random word from the list."""
-    return WORDS[random.randint(0, len(WORDS) - 1)]
+    #return WORDS[random.randint(0, len(WORDS) - 1)]
+    return WORDS[4]
 
 
 def display_game_state(mistakes, secret_word, guessed_letters):
@@ -63,7 +64,7 @@ def get_letter():
 def play_game():
     while True:
         secret_word = get_random_word()
-        guessed_letters = []
+        guessed_letters = set()
         mistakes = 0
 
         print("Welcome to Snowman Meltdown!")
@@ -73,7 +74,7 @@ def play_game():
 
             guess = get_letter()
             print("You guessed:", guess)
-            guessed_letters.append(guess)
+            guessed_letters.add(guess)
             if not guess in secret_word:
                 mistakes += 1
 
