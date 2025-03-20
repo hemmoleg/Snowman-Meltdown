@@ -1,4 +1,4 @@
-import ascii_art as STAGES
+from ascii_art import STAGES
 import random
 from snowman import WORDS
 
@@ -21,6 +21,18 @@ def display_game_state(mistakes, secret_word, guessed_letters):
     print("\n")
 
 
+def check_game_won(secret_word, guessed_letters):
+    found_counter = 0
+    for c in guessed_letters:
+        if c in secret_word:
+            found_counter += 1
+
+    if found_counter == len(secret_word):
+        return True
+    else:
+        return False
+
+
 def play_game():
     secret_word = get_random_word()
     guessed_letters = []
@@ -28,8 +40,20 @@ def play_game():
 
     print("Welcome to Snowman Meltdown!")
     # For now, display the initial game state.
-    display_game_state(mistakes, secret_word, guessed_letters)
 
-    # Prompt user for one guess (logic to be enhanced later)
-    guess = input("Guess a letter: ").lower()
-    print("You guessed:", guess)
+    while mistakes < 4:
+        display_game_state(mistakes, secret_word, guessed_letters)
+
+        # Prompt user for one guess (logic to be enhanced later)
+        guess = input("Guess a letter: ").lower()
+        print("You guessed:", guess)
+        guessed_letters.append(guess)
+        if not guess in secret_word:
+            mistakes += 1
+
+        if check_game_won(secret_word, guessed_letters):
+            print("GAME WON")
+            exit()
+
+    print("GAME OVER")
+
