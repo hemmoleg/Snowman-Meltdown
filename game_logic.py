@@ -2,6 +2,7 @@ from ascii_art import STAGES
 import random
 from snowman import WORDS
 
+
 def get_random_word():
     """Selects a random word from the list."""
     return WORDS[random.randint(0, len(WORDS) - 1)]
@@ -80,7 +81,7 @@ def play_game():
                 print("GAME WON")
                 break
 
-        if mistakes == 4:
+        if mistakes >= 4:
             print("GAME OVER")
 
         if not get_play_again():
