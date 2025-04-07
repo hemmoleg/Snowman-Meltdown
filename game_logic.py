@@ -23,6 +23,16 @@ def display_game_state(mistakes, secret_word, guessed_letters):
 
 
 def check_game_won(secret_word, guessed_letters):
+    """
+        Determines if the game has been won based on the guessed letters.
+
+        Parameters:
+            secret_word (str): The word that needs to be guessed.
+            guessed_letters (list[str]): A list of letters that the player has guessed.
+
+        Returns:
+            bool: True if all letters in the secret word have been guessed, False otherwise.
+        """
     found_counter = 0
     for c in guessed_letters:
         if c in secret_word:
@@ -30,15 +40,15 @@ def check_game_won(secret_word, guessed_letters):
 
     if found_counter == len(secret_word):
         return True
-    else:
-        return False
+
+    return False
 
 
 def get_play_again():
     while True:
         try:
-            again = str(input("Play again? y/n: "))
-            if again != 'y' and again != 'n':
+            again = input("Play again? y/n: ").lower()
+            if again not in ("y", "n"):
                 print("Please enter either 'n' or 'y'")
             else:
                 break
